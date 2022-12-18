@@ -19,8 +19,8 @@ class CRUDBoosterServiceProvider extends ServiceProvider
      */
 
     public function boot()
-    {        
-                                
+    {
+
         $this->loadViewsFrom(__DIR__.'/views', 'crudbooster');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadTranslationsFrom(__DIR__.'/localization','crudbooster');
@@ -31,6 +31,8 @@ class CRUDBoosterServiceProvider extends ServiceProvider
             $this->publishes([__DIR__.'/userfiles/controllers/CBHook.php' => app_path('Http/Controllers/CBHook.php')],'CBHook');
             $this->publishes([__DIR__.'/userfiles/controllers/AdminCmsUsersController.php' => app_path('Http/Controllers/AdminCmsUsersController.php')],'cb_user_controller');
             $this->publishes([__DIR__.'/assets'=>public_path('vendor/crudbooster')],'cb_asset');
+            $this->publishes([__DIR__ . '/assets/assets/js/voila_filemanager.js' => public_path('js/voila_filemanager.js')], 'voila_filemanager');
+
         }
 
         $this->customValidation();
@@ -43,8 +45,8 @@ class CRUDBoosterServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {                                   
-        require __DIR__.'/helpers/Helper.php';      
+    {
+        require __DIR__.'/helpers/Helper.php';
 
         $this->mergeConfigFrom(__DIR__.'/configs/crudbooster.php','crudbooster');
 
@@ -64,7 +66,7 @@ class CRUDBoosterServiceProvider extends ServiceProvider
         $loader->alias('CRUDBooster', 'crocodicstudio\crudbooster\helpers\CRUDBooster');
         $loader->alias('CB', 'crocodicstudio\crudbooster\helpers\CB');
     }
-   
+
     private function registerSingleton()
     {
         $this->app->singleton('crudbooster', function ()
@@ -75,7 +77,7 @@ class CRUDBoosterServiceProvider extends ServiceProvider
         $this->app->singleton('crudboosterinstall',function() {
             return new CrudboosterInstallationCommand;
         });
-        
+
         $this->app->singleton('crudboosterupdate',function() {
             return new CrudboosterUpdateCommand;
         });

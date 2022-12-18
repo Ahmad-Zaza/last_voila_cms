@@ -88,7 +88,7 @@
                 var v = t.val();
                 t.next("ul").remove();
                 if (!v) return false;
-
+                console.log("vvvvv=> ", types);
                 var list = '';
                 $.each(types, function (i, obj) {
                     if (obj.includes(v.toLowerCase())) {
@@ -471,7 +471,7 @@
                                     <?php
 
                                     $type = $form["type"] ?: "text";
-                                    $types = base_path('vendor/crocodicstudio/crudbooster/src/views/default/type_components/'.$type.'/info.json');
+                                    $types = base_path('vendor/voila_crocodicstudio/crudbooster/src/views/default/type_components/'.$type.'/info.json');
                                     $types = file_get_contents($types);
                                     $types = json_decode($types);
 
