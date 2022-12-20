@@ -2,7 +2,7 @@
 
 namespace crocodicstudio\crudbooster\helpers;
 
-
+use crocodicstudio\crudbooster\controllers\VoilaFileManagerController;
 use crocodicstudio\crudbooster\middlewares\CBAuthAPI;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +11,9 @@ class CBRouter
 {
     private static $cb_namespace = '\crocodicstudio\crudbooster\controllers';
 
-    public static function getCBControllerFiles() {
-        $controllers = glob(__DIR__.'/../controllers/*.php');
+    public static function getCBControllerFiles()
+    {
+        $controllers = glob(__DIR__ . '/../controllers/*.php');
         $result = [];
         foreach ($controllers as $file) {
             $result[] = str_replace('.php', '', basename($file));
@@ -20,10 +21,11 @@ class CBRouter
         return $result;
     }
 
-    private static function apiRoute() {
+    private static function apiRoute()
+    {
         // API Authentication
-        Route::group(['middleware'=>['api'],'namespace'=>static::$cb_namespace], function() {
-            Route::post("api/get-token","ApiAuthorizationController@postGetToken");
+        Route::group(['middleware' => ['api'], 'namespace' => static::$cb_namespace], function () {
+            Route::post("api/get-token", "ApiAuthorizationController@postGetToken");
         });
 
         Route::group(['middleware' => ['api', CBAuthAPI::class], 'namespace' => 'App\Http\Controllers'], function () {
@@ -36,14 +38,14 @@ class CBRouter
 
                 if (substr($names, 0, 4) == 'api_') {
                     $names = str_replace('api_', '', $names);
-                    Route::any('api/'.$names, $v.'@execute_api');
+                    Route::any('api/' . $names, $v . '@execute_api');
                 }
             }
-
         });
     }
 
-    private static function uploadRoute() {
+    private static function uploadRoute()
+    {
         Route::group(['middleware' => ['web'], 'namespace' => static::$cb_namespace], function () {
             Route::get('api-documentation', ['uses' => 'ApiCustomController@apiDocumentation', 'as' => 'apiDocumentation']);
             Route::get('download-documentation-postman', ['uses' => 'ApiCustomController@getDownloadPostman', 'as' => 'downloadDocumentationPostman']);
@@ -51,7 +53,8 @@ class CBRouter
         });
     }
 
-    private static function authRoute() {
+    private static function authRoute()
+    {
         Route::group(['middleware' => ['web'], 'prefix' => config('crudbooster.ADMIN_PATH'), 'namespace' => static::$cb_namespace], function () {
 
             Route::post('unlock-screen', ['uses' => 'AdminController@postUnlockScreen', 'as' => 'postUnlockScreen']);
@@ -66,7 +69,8 @@ class CBRouter
         });
     }
 
-    private static function userControllerRoute() {
+    private static function userControllerRoute()
+    {
         Route::group([
             'middleware' => ['web', '\crocodicstudio\crudbooster\middlewares\CBBackend'],
             'prefix' => config('crudbooster.ADMIN_PATH'),
@@ -93,14 +97,15 @@ class CBRouter
                     try {
                         CRUDBooster::routeController($v->path, $v->controller);
                     } catch (\Exception $e) {
-                        Log::error("Path = ".$v->path."\nController = ".$v->controller."\nError = ".$e->getMessage());
+                        Log::error("Path = " . $v->path . "\nController = " . $v->controller . "\nError = " . $e->getMessage());
                     }
                 }
             }
         });
     }
 
-    private static function cbRoute() {
+    private static function cbRoute()
+    {
         Route::group([
             'middleware' => ['web', '\crocodicstudio\crudbooster\middlewares\CBBackend'],
             'prefix' => config('crudbooster.ADMIN_PATH'),
@@ -133,20 +138,32 @@ class CBRouter
                     try {
                         CRUDBooster::routeController($v->path, $v->controller, static::$cb_namespace);
                     } catch (\Exception $e) {
-                        Log::error("Path = ".$v->path."\nController = ".$v->controller."\nError = ".$e->getMessage());
+                        Log::error("Path = " . $v->path . "\nController = " . $v->controller . "\nError = " . $e->getMessage());
                     }
                 }
             }
         });
     }
 
-    public static function route() {
+    private static function voilaFileManagerRout()
+    {
+        Route::group(['middleware' => ['web'], 'prefix' => "", 'namespace' => static::$cb_namespace], function () {
+            Route::get('/filemanager-dialog', [VoilaFileManagerController::class, 'index'])->name('dialog');
+            Route::match(array('GET', 'POST'), '/upload', [VoilaFileManagerController::class, 'upload'])->name('filemanager.upload');
+            Route::match(array('GET', 'POST'), '/execute', [VoilaFileManagerController::class, 'execute'])->name('filemanager.excute');
+            Route::match(array('GET', 'POST'), '/ajax_calls', [VoilaFileManagerController::class, 'ajaxCall'])->name("filemanager.ajax_calls");
+            Route::post('/download', [VoilaFileManagerController::class, 'forceDownload'])->name("filemanager.download");
+        });
+    }
+
+    public static function route()
+    {
 
         static::apiRoute();
         static::uploadRoute();
         static::authRoute();
         static::userControllerRoute();
         static::cbRoute();
+        static::voilaFileManagerRout();
     }
-
 }
