@@ -71,8 +71,6 @@
 
 
 @endif
-
-
 <div class="modal fade" id="modalInsertPhotosingle{{$name}}" >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -93,10 +91,11 @@
 
 function OpenInsertImagesingle(name) {
 
-    var link=`<iframe width="100%" height="400" src="/js/includes/filemanager/dialog.php?type=2&multiple=0&field_id=`+name+`" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>`;
+    // var link=`<iframe width="100%" height="400" src="/js/includes/filemanager/dialog.php?type=2&multiple=0&field_id=`+name+`" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>`;
+    var link=`<iframe width="100%" height="400" src="{{Route('dialog')}}?type=2&multiple=0&field_id=`+name+`" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll;"></iframe>`;
     console.log(link);
 
-    $("#modalInsertPhotosingle{{$name}} .modal-body").html(link);
+     $("#modalInsertPhotosingle{{$name}} .modal-body").html(link);
     $("#modalInsertPhotosingle{{$name}}").modal();
 }
 
