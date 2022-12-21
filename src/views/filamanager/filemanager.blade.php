@@ -804,8 +804,7 @@ $get_params = http_build_query($get_params);
                             <div class="row-fluid">
                                 <div class="span4 half">
                                     <?php if ($config['upload_files']) {?>
-                                    <button class="tip btn upload-btn"
-                                        title="{{ cbLang('filemanager.Upload_file') }}"><i
+                                    <button class="tip btn upload-btn" title="{{ cbLang('filemanager.Upload_file') }}"><i
                                             class="rficon-upload"></i></button>
                                     <?php }?>
                                     <?php if ($config['create_text_files']) {?>
@@ -1463,7 +1462,7 @@ if (!empty($bc)) {
             style="background-color:#000; position:fixed; width:100%; height:100%; top:0px; left:0px;z-index:100000">
         </div>
         <img id="loading_animation"
-            src="<?php echo base_path(); ?>/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/img/storing_animation.gif"
+            src="{{asset('vendor/filemanager/img/storing_animation.gif')}}"
             alt="loading"
             style="z-index:10001; margin-left:-32px; margin-top:-32px; position:fixed; left:50%; top:50%">
     </div>
