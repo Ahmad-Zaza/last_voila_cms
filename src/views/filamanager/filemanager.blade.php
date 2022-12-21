@@ -383,13 +383,13 @@ $get_params = http_build_query($get_params);
     <input type="hidden" id="upload_dir" value="<?php echo $config['upload_dir']; ?>" />
     <input type="hidden" id="cur_dir" value="<?php echo $cur_dir; ?>" />
     <input type="hidden" id="cur_dir_thumb" value="<?php echo $cur_dir_thumb; ?>" />
-    <input type="hidden" id="insert_folder_name" value="<?php echo trans('Insert_Folder_Name'); ?>" />
-    <input type="hidden" id="rename_existing_folder" value="<?php echo trans('Rename_existing_folder'); ?>" />
-    <input type="hidden" id="new_folder" value="<?php echo trans('New_Folder'); ?>" />
-    <input type="hidden" id="ok" value="<?php echo trans('OK'); ?>" />
-    <input type="hidden" id="cancel" value="<?php echo trans('Cancel'); ?>" />
-    <input type="hidden" id="rename" value="<?php echo trans('Rename'); ?>" />
-    <input type="hidden" id="lang_duplicate" value="<?php echo trans('Duplicate'); ?>" />
+    <input type="hidden" id="insert_folder_name" value="<?php echo cbLang('filemanager.Insert_Folder_Name'); ?>" />
+    <input type="hidden" id="rename_existing_folder" value="<?php echo cbLang('filemanager.Rename_existing_folder'); ?>" />
+    <input type="hidden" id="new_folder" value="<?php echo cbLang('filemanager.New_Folder'); ?>" />
+    <input type="hidden" id="ok" value="<?php echo cbLang('filemanager.OK'); ?>" />
+    <input type="hidden" id="cancel" value="<?php echo cbLang('filemanager.Cancel'); ?>" />
+    <input type="hidden" id="rename" value="<?php echo cbLang('filemanager.Rename'); ?>" />
+    <input type="hidden" id="lang_duplicate" value="<?php echo cbLang('filemanager.Duplicate'); ?>" />
     <input type="hidden" id="duplicate" value="<?php if ($config['duplicate_files']) {
         echo 1;
     } else {
@@ -405,7 +405,7 @@ $get_params = http_build_query($get_params);
     <input type="hidden" id="sort_by" value="<?php echo $sort_by; ?>" />
     <input type="hidden" id="descending" value="<?php echo $descending ? 1 : 0; ?>" />
     <input type="hidden" id="current_url" value="<?php echo str_replace(['&filter=' . $filter, '&sort_by=' . $sort_by, '&descending=' . intval($descending)], [''], $config['base_url'] . htmlspecialchars($_SERVER['REQUEST_URI'])); ?>" />
-    <input type="hidden" id="lang_show_url" value="<?php echo trans('Show_url'); ?>" />
+    <input type="hidden" id="lang_show_url" value="<?php echo cbLang('filemanager.Show_url'); ?>" />
     <input type="hidden" id="copy_cut_files_allowed" value="<?php if ($config['copy_cut_files']) {
         echo 1;
     } else {
@@ -420,17 +420,17 @@ $get_params = http_build_query($get_params);
     ?>" />
     <input type="hidden" id="copy_cut_max_size" value="<?php echo $config['copy_cut_max_size']; ?>" />
     <input type="hidden" id="copy_cut_max_count" value="<?php echo $config['copy_cut_max_count']; ?>" />
-    <input type="hidden" id="lang_copy" value="<?php echo trans('Copy'); ?>" />
-    <input type="hidden" id="lang_cut" value="<?php echo trans('Cut'); ?>" />
-    <input type="hidden" id="lang_paste" value="<?php echo trans('Paste'); ?>" />
-    <input type="hidden" id="lang_paste_here" value="<?php echo trans('Paste_Here'); ?>" />
-    <input type="hidden" id="lang_paste_confirm" value="<?php echo trans('Paste_Confirm'); ?>" />
-    <input type="hidden" id="lang_files" value="<?php echo trans('Files'); ?>" />
-    <input type="hidden" id="lang_folders" value="<?php echo trans('Folders'); ?>" />
-    <input type="hidden" id="lang_files_on_clipboard" value="<?php echo trans('Files_ON_Clipboard'); ?>" />
+    <input type="hidden" id="lang_copy" value="<?php echo cbLang('filemanager.Copy'); ?>" />
+    <input type="hidden" id="lang_cut" value="<?php echo cbLang('filemanager.Cut'); ?>" />
+    <input type="hidden" id="lang_paste" value="<?php echo cbLang('filemanager.Paste'); ?>" />
+    <input type="hidden" id="lang_paste_here" value="<?php echo cbLang('filemanager.Paste_Here'); ?>" />
+    <input type="hidden" id="lang_paste_confirm" value="<?php echo cbLang('filemanager.Paste_Confirm'); ?>" />
+    <input type="hidden" id="lang_files" value="<?php echo cbLang('filemanager.Files'); ?>" />
+    <input type="hidden" id="lang_folders" value="<?php echo cbLang('filemanager.Folders'); ?>" />
+    <input type="hidden" id="lang_files_on_clipboard" value="<?php echo cbLang('filemanager.Files_ON_Clipboard'); ?>" />
     <input type="hidden" id="clipboard" value="<?php echo isset($_SESSION['RF']['clipboard']['path']) && trim($_SESSION['RF']['clipboard']['path']) != null ? 1 : 0; ?>" />
-    <input type="hidden" id="lang_clear_clipboard_confirm" value="<?php echo trans('Clear_Clipboard_Confirm'); ?>" />
-    <input type="hidden" id="lang_file_permission" value="<?php echo trans('File_Permission'); ?>" />
+    <input type="hidden" id="lang_clear_clipboard_confirm" value="<?php echo cbLang('filemanager.Clear_Clipboard_Confirm'); ?>" />
+    <input type="hidden" id="lang_file_permission" value="<?php echo cbLang('filemanager.File_Permission'); ?>" />
     <input type="hidden" id="chmod_files_allowed" value="<?php if ($config['chmod_files']) {
         echo 1;
     } else {
@@ -443,21 +443,21 @@ $get_params = http_build_query($get_params);
         echo 0;
     }
     ?>" />
-    <input type="hidden" id="lang_lang_change" value="<?php echo trans('Lang_Change'); ?>" />
+    <input type="hidden" id="lang_lang_change" value="<?php echo cbLang('filemanager.Lang_Change'); ?>" />
     <input type="hidden" id="edit_text_files_allowed" value="<?php if ($config['edit_text_files']) {
         echo 1;
     } else {
         echo 0;
     }
     ?>" />
-    <input type="hidden" id="lang_edit_file" value="<?php echo trans('Edit_File'); ?>" />
-    <input type="hidden" id="lang_new_file" value="<?php echo trans('New_File'); ?>" />
-    <input type="hidden" id="lang_filename" value="<?php echo trans('Filename'); ?>" />
-    <input type="hidden" id="lang_file_info" value="<?php echo fix_strtoupper(trans('File_info')); ?>" />
-    <input type="hidden" id="lang_edit_image" value="<?php echo trans('Edit_image'); ?>" />
-    <input type="hidden" id="lang_error_upload" value="<?php echo trans('Error_Upload'); ?>" />
-    <input type="hidden" id="lang_select" value="<?php echo trans('Select'); ?>" />
-    <input type="hidden" id="lang_extract" value="<?php echo trans('Extract'); ?>" />
+    <input type="hidden" id="lang_edit_file" value="<?php echo cbLang('filemanager.Edit_File'); ?>" />
+    <input type="hidden" id="lang_new_file" value="<?php echo cbLang('filemanager.New_File'); ?>" />
+    <input type="hidden" id="lang_filename" value="<?php echo cbLang('filemanager.Filename'); ?>" />
+    <input type="hidden" id="lang_file_info" value="<?php echo fix_strtoupper(cbLang('filemanager.File_info')); ?>" />
+    <input type="hidden" id="lang_edit_image" value="<?php echo cbLang('filemanager.Edit_image'); ?>" />
+    <input type="hidden" id="lang_error_upload" value="<?php echo cbLang('filemanager.Error_Upload'); ?>" />
+    <input type="hidden" id="lang_select" value="<?php echo cbLang('filemanager.Select'); ?>" />
+    <input type="hidden" id="lang_extract" value="<?php echo cbLang('filemanager.Extract'); ?>" />
     <input type="hidden" id="extract_files" value="<?php if ($config['extract_files']) {
         echo 1;
     } else {
@@ -478,16 +478,16 @@ $get_params = http_build_query($get_params);
         <div class="flex">
             <div class="text-center">
                 <button class="btn btn-inverse close-uploader"><i class="icon-backward icon-white"></i>
-                    <?php echo trans('Return_Files_List'); ?></button>
+                    <?php echo cbLang('filemanager.Return_Files_List'); ?></button>
             </div>
             <div class="space10"></div>
             <div class="tabbable upload-tabbable">
                 <!-- Only required for left/right tabs -->
                 <div class="container1">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#baseUpload" data-toggle="tab"><?php echo trans('Upload_base'); ?></a></li>
+                        <li class="active"><a href="#baseUpload" data-toggle="tab"><?php echo cbLang('filemanager.Upload_base'); ?></a></li>
                         <?php if ($config['url_upload']) {?>
-                        <li><a href="#urlUpload" data-toggle="tab"><?php echo trans('Upload_url'); ?></a></li>
+                        <li><a href="#urlUpload" data-toggle="tab"><?php echo cbLang('filemanager.Upload_url'); ?></a></li>
                         <?php }?>
                     </ul>
                     <div class="tab-content">
@@ -510,12 +510,12 @@ $get_params = http_build_query($get_params);
                                             <!-- The fileinput-button span is used to style the file input field as button -->
                                             <span class="btn btn-success fileinput-button">
                                                 <i class="glyphicon glyphicon-plus"></i>
-                                                <span><?php echo trans('Upload_add_files'); ?></span>
+                                                <span><?php echo cbLang('filemanager.Upload_add_files'); ?></span>
                                                 <input type="file" name="files[]" multiple="multiple">
                                             </span>
                                             <button type="submit" class="btn btn-primary start staaaaaaaaaart">
                                                 <i class="glyphicon glyphicon-upload"></i>
-                                                <span><?php echo trans('Upload_start'); ?></span>
+                                                <span><?php echo cbLang('filemanager.Upload_start'); ?></span>
                                             </button>
                                             <!-- The global file processing state -->
                                             <span class="fileupload-process"></span>
@@ -527,7 +527,7 @@ $get_params = http_build_query($get_params);
                                             <tbody class="files"></tbody>
                                         </table>
                                     </div>
-                                    <div class="upload-help"><?php echo trans('Upload_base_help'); ?></div>
+                                    <div class="upload-help"><?php echo cbLang('filemanager.Upload_base_help'); ?></div>
                                 </div>
                             </form>
                             <!-- The template to display files available for upload -->
@@ -599,15 +599,15 @@ $get_params = http_build_query($get_params);
                             <br />
                             <form class="form-horizontal">
                                 <div class="control-group">
-                                    <label class="control-label" for="url"><?php echo trans('Upload_url'); ?></label>
+                                    <label class="control-label" for="url"><?php echo cbLang('filemanager.Upload_url'); ?></label>
                                     <div class="controls">
                                         <input type="text" class="input-block-level" id="url"
-                                            placeholder="<?php echo trans('Upload_url'); ?>">
+                                            placeholder="<?php echo cbLang('filemanager.Upload_url'); ?>">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button class="btn btn-primary" id="uploadURL"><?php echo trans('Upload_file'); ?></button>
+                                        <button class="btn btn-primary" id="uploadURL"><?php echo cbLang('filemanager.Upload_file'); ?></button>
                                     </div>
                                 </div>
                             </form>
@@ -665,7 +665,7 @@ $get_params = http_build_query($get_params);
                     $is_dir = false;
                 } else {
                     $current_folders_number++;
-                    $file_ext = trans('Type_dir');
+                    $file_ext = cbLang('filemanager.Type_dir');
                     $is_dir = true;
                 }
                 $sorted[$k] = [
@@ -687,7 +687,7 @@ $get_params = http_build_query($get_params);
                         } else {
                             $size = 0;
                         }
-                        $file_ext = trans('Type_dir');
+                        $file_ext = cbLang('filemanager.Type_dir');
                         $sorted[$k] = [
                             'is_dir' => true,
                             'file' => $file,
@@ -797,42 +797,42 @@ $get_params = http_build_query($get_params);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <div class="brand"><?php echo trans('Toolbar'); ?></div>
+                    <div class="brand"><?php echo cbLang('filemanager.Toolbar'); ?></div>
                     <div class="nav-collapse collapse">
                         <div class="filters">
                             <div class="row-fluid">
                                 <div class="span4 half">
                                     <?php if ($config['upload_files']) {?>
-                                    <button class="tip btn upload-btn" title="{{ trans('Upload_file') }}"><i
+                                    <button class="tip btn upload-btn" title="{{ cbLang('filemanager.Upload_file') }}"><i
                                             class="rficon-upload"></i></button>
                                     <?php }?>
                                     <?php if ($config['create_text_files']) {?>
-                                    <button class="tip btn create-file-btn" title="<?php echo trans('New_File'); ?>"><i
+                                    <button class="tip btn create-file-btn" title="<?php echo cbLang('filemanager.New_File'); ?>"><i
                                             class="icon-plus"></i><i class="icon-file"></i></button>
                                     <?php }?>
                                     <?php if ($config['create_folders']) {?>
-                                    <button class="tip btn new-folder" title="<?php echo trans('New_Folder'); ?>"><i
+                                    <button class="tip btn new-folder" title="<?php echo cbLang('filemanager.New_Folder'); ?>"><i
                                             class="icon-plus"></i><i class="icon-folder-open"></i></button>
                                     <?php }?>
                                     <?php if ($config['copy_cut_files'] || $config['copy_cut_dirs']) {?>
-                                    <button class="tip btn paste-here-btn" title="<?php echo trans('Paste_Here'); ?>"><i
+                                    <button class="tip btn paste-here-btn" title="<?php echo cbLang('filemanager.Paste_Here'); ?>"><i
                                             class="rficon-clipboard-apply"></i></button>
-                                    <button class="tip btn clear-clipboard-btn" title="<?php echo trans('Clear_Clipboard'); ?>"><i
+                                    <button class="tip btn clear-clipboard-btn" title="<?php echo cbLang('filemanager.Clear_Clipboard'); ?>"><i
                                             class="rficon-clipboard-clear"></i></button>
                                     <?php }?>
                                     <div id="multiple-selection" style="display:none;">
                                         <?php if ($config['multiple_selection']) {?>
                                         <?php if ($config['delete_files']) {?>
-                                        <button class="tip btn multiple-delete-btn" title="<?php echo trans('Erase'); ?>"
-                                            data-confirm="<?php echo trans('Confirm_del'); ?>"><i class="icon-trash"></i></button>
+                                        <button class="tip btn multiple-delete-btn" title="<?php echo cbLang('filemanager.Erase'); ?>"
+                                            data-confirm="<?php echo cbLang('filemanager.Confirm_del'); ?>"><i class="icon-trash"></i></button>
                                         <?php }?>
-                                        <button class="tip btn multiple-select-btn" title="<?php echo trans('Select_All'); ?>"><i
+                                        <button class="tip btn multiple-select-btn" title="<?php echo cbLang('filemanager.Select_All'); ?>"><i
                                                 class="icon-check"></i></button>
-                                        <button class="tip btn multiple-deselect-btn" title="<?php echo trans('Deselect_All'); ?>"><i
+                                        <button class="tip btn multiple-deselect-btn" title="<?php echo cbLang('filemanager.Deselect_All'); ?>"><i
                                                 class="icon-ban-circle"></i></button>
                                         <?php if ($apply_type != "apply_none" && $config['multiple_selection_action_button']) {?>
                                         <button class="btn multiple-action-btn btn-inverse"
-                                            data-function="<?php echo $apply_type; ?>"><?php echo trans('Select'); ?></button>
+                                            data-function="<?php echo $apply_type; ?>"><?php echo cbLang('filemanager.Select'); ?></button>
                                         <?php }?>
                                         <?php }?>
                                     </div>
@@ -842,7 +842,7 @@ $get_params = http_build_query($get_params);
                                         echo ' btn-inverse';
                                     }
                                     ?>" id="view0" data-value="0"
-                                        title="<?php echo trans('View_boxes'); ?>"><i
+                                        title="<?php echo cbLang('filemanager.View_boxes'); ?>"><i
                                             class="icon-th <?php if ($view == 0) {
                                                 echo 'icon-white';
                                             }
@@ -851,7 +851,7 @@ $get_params = http_build_query($get_params);
                                         echo ' btn-inverse';
                                     }
                                     ?>" id="view1" data-value="1"
-                                        title="<?php echo trans('View_list'); ?>"><i
+                                        title="<?php echo cbLang('filemanager.View_list'); ?>"><i
                                             class="icon-align-justify <?php if ($view == 1) {
                                                 echo 'icon-white';
                                             }
@@ -860,57 +860,57 @@ $get_params = http_build_query($get_params);
                                         echo ' btn-inverse';
                                     }
                                     ?>" id="view2" data-value="2"
-                                        title="<?php echo trans('View_columns_list'); ?>"><i
+                                        title="<?php echo cbLang('filemanager.View_columns_list'); ?>"><i
                                             class="icon-fire <?php if ($view == 2) {
                                                 echo 'icon-white';
                                             }
                                             ?>"></i></button>
                                 </div>
                                 <div class="span6 entire types">
-                                    <span><?php echo trans('Filters'); ?>:</span>
+                                    <span><?php echo cbLang('filemanager.Filters'); ?>:</span>
                                     <?php if ($_GET['type'] != 1 && $_GET['type'] != 3 && $config['show_filter_buttons']) {?>
                                     <?php if (count($config['ext_file']) > 0 or false) {?>
                                     <input id="select-type-1" name="radio-sort" type="radio"
                                         data-item="ff-item-type-1" checked="checked" class="hide" />
-                                    <label id="ff-item-type-1" title="<?php echo trans('Files'); ?>" for="select-type-1"
+                                    <label id="ff-item-type-1" title="<?php echo cbLang('filemanager.Files'); ?>" for="select-type-1"
                                         class="tip btn ff-label-type-1"><i class="icon-file"></i></label>
                                     <?php }?>
                                     <?php if (count($config['ext_img']) > 0 or false) {?>
                                     <input id="select-type-2" name="radio-sort" type="radio"
                                         data-item="ff-item-type-2" class="hide" />
-                                    <label id="ff-item-type-2" title="<?php echo trans('Images'); ?>" for="select-type-2"
+                                    <label id="ff-item-type-2" title="<?php echo cbLang('filemanager.Images'); ?>" for="select-type-2"
                                         class="tip btn ff-label-type-2"><i class="icon-picture"></i></label>
                                     <?php }?>
                                     <?php if (count($config['ext_misc']) > 0 or false) {?>
                                     <input id="select-type-3" name="radio-sort" type="radio"
                                         data-item="ff-item-type-3" class="hide" />
-                                    <label id="ff-item-type-3" title="<?php echo trans('Archives'); ?>" for="select-type-3"
+                                    <label id="ff-item-type-3" title="<?php echo cbLang('filemanager.Archives'); ?>" for="select-type-3"
                                         class="tip btn ff-label-type-3"><i class="icon-inbox"></i></label>
                                     <?php }?>
                                     <?php if (count($config['ext_video']) > 0 or false) {?>
                                     <input id="select-type-4" name="radio-sort" type="radio"
                                         data-item="ff-item-type-4" class="hide" />
-                                    <label id="ff-item-type-4" title="<?php echo trans('Videos'); ?>" for="select-type-4"
+                                    <label id="ff-item-type-4" title="<?php echo cbLang('filemanager.Videos'); ?>" for="select-type-4"
                                         class="tip btn ff-label-type-4"><i class="icon-film"></i></label>
                                     <?php }?>
                                     <?php if (count($config['ext_music']) > 0 or false) {?>
                                     <input id="select-type-5" name="radio-sort" type="radio"
                                         data-item="ff-item-type-5" class="hide" />
-                                    <label id="ff-item-type-5" title="<?php echo trans('Music'); ?>" for="select-type-5"
+                                    <label id="ff-item-type-5" title="<?php echo cbLang('filemanager.Music'); ?>" for="select-type-5"
                                         class="tip btn ff-label-type-5"><i class="icon-music"></i></label>
                                     <?php }?>
                                     <?php }?>
                                     <input accesskey="f" type="text" class="filter-input <?php echo $_GET['type'] != 1 && $_GET['type'] != 3 ? '' : 'filter-input-notype'; ?>"
-                                        id="filter-input" name="filter" placeholder="<?php echo fix_strtolower(trans('Text_filter')); ?>..."
+                                        id="filter-input" name="filter" placeholder="<?php echo fix_strtolower(cbLang('filemanager.Text_filter')); ?>..."
                                         value="<?php echo $filter; ?>" /><?php if ($n_files > $config['file_number_limit_js']) {?><label id="filter"
                                         class="btn"><i class="icon-play"></i></label><?php }?>
 
                                     <input id="select-type-all" name="radio-sort" type="radio"
                                         data-item="ff-item-type-all" class="hide" />
-                                    <label id="ff-item-type-all" title="<?php echo trans('All'); ?>"
+                                    <label id="ff-item-type-all" title="<?php echo cbLang('filemanager.All'); ?>"
                                         <?php if ($_GET['type'] == 1 || $_GET['type'] == 3) {?>style="visibility: hidden;" <?php }?>
                                         data-item="ff-item-type-all" for="select-type-all" style="margin-rigth:0px;"
-                                        class="tip btn btn-inverse ff-label-type-all"><?php echo trans('All'); ?></label>
+                                        class="tip btn btn-inverse ff-label-type-all"><?php echo cbLang('filemanager.All'); ?></label>
 
                                 </div>
                             </div>
@@ -959,30 +959,30 @@ if (!empty($bc)) {
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pull-left sorting">
-                            <li class="text-center"><strong><?php echo trans('Sorting'); ?></strong></li>
+                            <li class="text-center"><strong><?php echo cbLang('filemanager.Sorting'); ?></strong></li>
                             <li><a class="sorter sort-name <?php if ($sort_by == 'name') {
                                 echo $descending ? 'descending' : 'ascending';
                             } ?>" href="javascript:void('')"
-                                    data-sort="name"><?php echo trans('Filename'); ?></a></li>
+                                    data-sort="name"><?php echo cbLang('filemanager.Filename'); ?></a></li>
                             <li><a class="sorter sort-date <?php if ($sort_by == 'date') {
                                 echo $descending ? 'descending' : 'ascending';
                             } ?>" href="javascript:void('')"
-                                    data-sort="date"><?php echo trans('Date'); ?></a></li>
+                                    data-sort="date"><?php echo cbLang('filemanager.Date'); ?></a></li>
                             <li><a class="sorter sort-size <?php if ($sort_by == 'size') {
                                 echo $descending ? 'descending' : 'ascending';
                             } ?>" href="javascript:void('')"
-                                    data-sort="size"><?php echo trans('Size'); ?></a></li>
+                                    data-sort="size"><?php echo cbLang('filemanager.Size'); ?></a></li>
                             <li><a class="sorter sort-extension <?php if ($sort_by == 'extension') {
                                 echo $descending ? 'descending' : 'ascending';
                             } ?>" href="javascript:void('')"
-                                    data-sort="extension"><?php echo trans('Type'); ?></a></li>
+                                    data-sort="extension"><?php echo cbLang('filemanager.Type'); ?></a></li>
                         </ul>
                     </div>
                 </li>
-                <li><small class="hidden-phone">(<span id="files_number"><?php echo $current_files_number . '</span> ' . trans('Files') . " - <span id='folders_number'>" . $current_folders_number . '</span> ' . trans('Folders'); ?>)</small></li>
+                <li><small class="hidden-phone">(<span id="files_number"><?php echo $current_files_number . '</span> ' . cbLang('filemanager.Files') . " - <span id='folders_number'>" . $current_folders_number . '</span> ' . cbLang('filemanager.Folders'); ?>)</small></li>
                 <?php if ($config['show_total_size']) {?>
                 <li><small class="hidden-phone"><span
-                            title="<?php echo trans('total size') . $config['MaxSizeTotal']; ?>"><?php echo trans('total size') . ': ' . makeSize($sizeCurrentFolder) . ($config['MaxSizeTotal'] !== false && is_int($config['MaxSizeTotal']) ? '/' . $config['MaxSizeTotal'] . ' ' . trans('MB') : ''); ?></span></small>
+                            title="<?php echo cbLang('filemanager.total size') . $config['MaxSizeTotal']; ?>"><?php echo cbLang('filemanager.total size') . ': ' . makeSize($sizeCurrentFolder) . ($config['MaxSizeTotal'] !== false && is_int($config['MaxSizeTotal']) ? '/' . $config['MaxSizeTotal'] . ' ' . cbLang('filemanager.MB') : ''); ?></span></small>
                 </li>
                 <?php }?>
             </ul>
@@ -995,7 +995,7 @@ if (!empty($bc)) {
                 <div class="alert alert-error">There is an error! The upload folder there isn't. Check your config.php
                     file. </div>
                 <?php } else {?>
-                <h4 id="help"><?php echo trans('Swipe_help'); ?></h4>
+                <h4 id="help"><?php echo cbLang('filemanager.Swipe_help'); ?></h4>
                 <?php if (isset($config['folder_message'])) {?>
                 <div class="alert alert-block"><?php echo $config['folder_message']; ?></div>
                 <?php }?>
@@ -1005,21 +1005,21 @@ if (!empty($bc)) {
                     <div class="file-name"><a class="sorter sort-name <?php if ($sort_by == 'name') {
                         echo $descending ? 'descending' : 'ascending';
                     } ?>"
-                            href="javascript:void('')" data-sort="name"><?php echo trans('Filename'); ?></a></div>
+                            href="javascript:void('')" data-sort="name"><?php echo cbLang('filemanager.Filename'); ?></a></div>
                     <div class="file-date"><a class="sorter sort-date <?php if ($sort_by == 'date') {
                         echo $descending ? 'descending' : 'ascending';
                     } ?>"
-                            href="javascript:void('')" data-sort="date"><?php echo trans('Date'); ?></a></div>
+                            href="javascript:void('')" data-sort="date"><?php echo cbLang('filemanager.Date'); ?></a></div>
                     <div class="file-size"><a class="sorter sort-size <?php if ($sort_by == 'size') {
                         echo $descending ? 'descending' : 'ascending';
                     } ?>"
-                            href="javascript:void('')" data-sort="size"><?php echo trans('Size'); ?></a></div>
-                    <div class='img-dimension'><?php echo trans('Dimension'); ?></div>
+                            href="javascript:void('')" data-sort="size"><?php echo cbLang('filemanager.Size'); ?></a></div>
+                    <div class='img-dimension'><?php echo cbLang('filemanager.Dimension'); ?></div>
                     <div class='file-extension'><a class="sorter sort-extension <?php if ($sort_by == 'extension') {
                         echo $descending ? 'descending' : 'ascending';
                     } ?>"
-                            href="javascript:void('')" data-sort="extension"><?php echo trans('Type'); ?></a></div>
-                    <div class='file-operations'><?php echo trans('Operations'); ?></div>
+                            href="javascript:void('')" data-sort="extension"><?php echo cbLang('filemanager.Type'); ?></a></div>
+                    <div class='file-operations'><?php echo cbLang('filemanager.Operations'); ?></div>
                 </div>
                 <?php }?>
 
@@ -1030,7 +1030,7 @@ if (!empty($bc)) {
 
     foreach ($files as $file_array) {
         $file = $file_array['file'];
-        if ($file == '.' || (substr($file, 0, 1) == '.' && isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(trans('Type_dir'))) || (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(trans('Type_dir'))) || ($file == '..' && $subdir == '') || in_array($file, $config['hidden_folders']) || ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos($file, $filter) === false)) {
+        if ($file == '.' || (substr($file, 0, 1) == '.' && isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(cbLang('filemanager.Type_dir'))) || (isset($file_array['extension']) && $file_array['extension'] != fix_strtolower(cbLang('filemanager.Type_dir'))) || ($file == '..' && $subdir == '') || in_array($file, $config['hidden_folders']) || ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos($file, $filter) === false)) {
             continue;
         }
         $new_name = fix_filename($file, $config);
@@ -1110,7 +1110,7 @@ if (!empty($bc)) {
                                 </div>
                                 <?php if ($file == "..") {?>
                                 <div class="box no-effect">
-                                    <h4><?php echo trans('Back'); ?></h4>
+                                    <h4><?php echo cbLang('filemanager.Back'); ?></h4>
                                 </div>
                             </a>
 
@@ -1129,21 +1129,21 @@ if (!empty($bc)) {
                             <input type="hidden" class="name" value="<?php echo $file_array['file_lcase']; ?>" />
                             <input type="hidden" class="date" value="<?php echo $file_array['date']; ?>" />
                             <input type="hidden" class="size" value="<?php echo $file_array['size']; ?>" />
-                            <input type="hidden" class="extension" value="<?php echo fix_strtolower(trans('Type_dir')); ?>" />
-                            <div class="file-date"><?php echo date(trans('Date_type'), $file_array['date']); ?></div>
+                            <input type="hidden" class="extension" value="<?php echo fix_strtolower(cbLang('filemanager.Type_dir')); ?>" />
+                            <div class="file-date"><?php echo date(cbLang('filemanager.Date_type'), $file_array['date']); ?></div>
                             <?php if ($config['show_folder_size']) {?>
                             <div class="file-size"><?php echo makeSize($file_array['size']); ?></div>
                             <input type="hidden" class="nfiles" value="<?php echo $file_array['nfiles']; ?>" />
                             <input type="hidden" class="nfolders" value="<?php echo $file_array['nfolders']; ?>" />
                             <?php }?>
-                            <div class='file-extension'><?php echo fix_strtolower(trans('Type_dir')); ?></div>
+                            <div class='file-extension'><?php echo fix_strtolower(cbLang('filemanager.Type_dir')); ?></div>
                             <figcaption>
                                 <a href="javascript:void('')"
                                     class="tip-left edit-button rename-file-paths <?php if ($config['rename_folders'] && !$file_prevent_rename) {
                                         echo 'rename-folder';
                                     }
                                     ?>"
-                                    title="<?php echo trans('Rename'); ?>" data-folder="1"
+                                    title="<?php echo cbLang('filemanager.Rename'); ?>" data-folder="1"
                                     data-permissions="<?php echo $file_array['permissions']; ?>">
                                     <i class="icon-pencil <?php if (!$config['rename_folders'] || $file_prevent_rename) {
                                         echo 'icon-white';
@@ -1153,7 +1153,7 @@ if (!empty($bc)) {
                                     echo 'delete-folder';
                                 }
                                 ?>"
-                                    title="<?php echo trans('Erase'); ?>" data-confirm="<?php echo trans('Confirm_Folder_del'); ?>">
+                                    title="<?php echo cbLang('filemanager.Erase'); ?>" data-confirm="<?php echo cbLang('filemanager.Confirm_Folder_del'); ?>">
                                     <i class="icon-trash <?php if (!$config['delete_folders'] || $file_prevent_delete) {
                                         echo 'icon-white';
                                     }
@@ -1170,7 +1170,7 @@ if (!empty($bc)) {
     foreach ($files as $nu => $file_array) {
         $file = $file_array['file'];
 
-        if ($file == '.' || $file == '..' || $file_array['extension'] == fix_strtolower(trans('Type_dir')) || !check_extension($file_array['extension'], $config) || ($filter != '' && $n_files > $config['file_number_limit_js'] && stripos($file, $filter) === false)) {
+        if ($file == '.' || $file == '..' || $file_array['extension'] == fix_strtolower(cbLang('filemanager.Type_dir')) || !check_extension($file_array['extension'], $config) || ($filter != '' && $n_files > $config['file_number_limit_js'] && stripos($file, $filter) === false)) {
             continue;
         }
 
@@ -1360,7 +1360,7 @@ if (!empty($bc)) {
                             <input type="hidden" class="size" value="<?php echo $file_array['size']; ?>" />
                             <input type="hidden" class="extension" value="<?php echo $file_array['extension']; ?>" />
                             <input type="hidden" class="name" value="<?php echo $file_array['file_lcase']; ?>" />
-                            <div class="file-date"><?php echo date(trans('Date_type'), $file_array['date']); ?></div>
+                            <div class="file-date"><?php echo date(cbLang('filemanager.Date_type'), $file_array['date']); ?></div>
                             <div class="file-size"><?php echo makeSize($file_array['size']); ?></div>
                             <div class='img-dimension'><?php if ($is_img) {
                                 echo $img_width . 'x' . $img_height;
@@ -1374,7 +1374,7 @@ if (!empty($bc)) {
                                     <input type="hidden" class="name_download" name="name"
                                         value="<?php echo $file; ?>" />
 
-                                    <a title="<?php echo trans('Download'); ?>" class="tip-right" href="javascript:void('')"
+                                    <a title="<?php echo cbLang('filemanager.Download'); ?>" class="tip-right" href="javascript:void('')"
                                         <?php if ($config['download_files']) {
                                             echo "onclick=\"$('#form" . $nu . "').submit();\"";
                                         }
@@ -1384,7 +1384,7 @@ if (!empty($bc)) {
                                         ?>"></i></a>
 
                                     <?php if ($is_img && $src_thumb != "") {?>
-                                    <a class="tip-right preview" title="<?php echo trans('Preview'); ?>"
+                                    <a class="tip-right preview" title="<?php echo cbLang('filemanager.Preview'); ?>"
                                         data-featherlight="<?php echo $src; ?>" href="#"><i
                                             class=" icon-eye-open"></i></a>
                                     <?php } elseif (($is_video || $is_audio) && in_array($file_array['extension'], $config['jplayer_exts'])) {?>
@@ -1392,19 +1392,19 @@ if (!empty($bc)) {
                                         echo 'audio';
                                     } else {
                                         echo 'video';
-                                    } ?>" title="<?php echo trans('Preview'); ?>"
+                                    } ?>" title="<?php echo cbLang('filemanager.Preview'); ?>"
                                         data-url="ajax_calls?action=media_preview&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder . $subdir . $file; ?>"
                                         href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                     <?php } elseif (in_array($file_array['extension'], $config['cad_exts'])) {?>
-                                    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview'); ?>"
+                                    <a class="tip-right file-preview-btn" title="<?php echo cbLang('filemanager.Preview'); ?>"
                                         data-url="ajax_calls?action=cad_preview&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder . $subdir . $file; ?>"
                                         href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                     <?php } elseif ($config['preview_text_files'] && in_array($file_array['extension'], $config['previewable_text_file_exts'])) {?>
-                                    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview'); ?>"
+                                    <a class="tip-right file-preview-btn" title="<?php echo cbLang('filemanager.Preview'); ?>"
                                         data-url="ajax_calls?action=get_file&sub_action=preview&preview_mode=text&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder . $subdir . $file; ?>"
                                         href="javascript:void('');"><i class=" icon-eye-open"></i></a>
                                     <?php } elseif ($config['googledoc_enabled'] && in_array($file_array['extension'], $config['googledoc_file_exts'])) {?>
-                                    <a class="tip-right file-preview-btn" title="<?php echo trans('Preview'); ?>"
+                                    <a class="tip-right file-preview-btn" title="<?php echo cbLang('filemanager.Preview'); ?>"
                                         data-url="ajax_calls?action=get_file&sub_action=preview&preview_mode=google&title=<?php echo $filename; ?>&file=<?php echo $rfm_subfolder . $subdir . $file; ?>"
                                         href="docs.google.com;"><i class=" icon-eye-open"></i></a>
                                     <?php } else {?>
@@ -1415,7 +1415,7 @@ if (!empty($bc)) {
                                             echo 'rename-file';
                                         }
                                         ?>"
-                                        title="<?php echo trans('Rename'); ?>" data-folder="0"
+                                        title="<?php echo cbLang('filemanager.Rename'); ?>" data-folder="0"
                                         data-permissions="<?php echo $file_array['permissions']; ?>">
                                         <i class="icon-pencil <?php if (!$config['rename_files'] || $file_prevent_rename) {
                                             echo 'icon-white';
@@ -1426,7 +1426,7 @@ if (!empty($bc)) {
                                         echo 'delete-file';
                                     }
                                     ?>"
-                                        title="<?php echo trans('Erase'); ?>" data-confirm="<?php echo trans('Confirm_del'); ?>">
+                                        title="<?php echo cbLang('filemanager.Erase'); ?>" data-confirm="<?php echo cbLang('filemanager.Confirm_del'); ?>">
                                         <i class="icon-trash <?php if (!$config['delete_files'] || $file_prevent_delete) {
                                             echo 'icon-white';
                                         }
@@ -1471,7 +1471,7 @@ if (!empty($bc)) {
     <div class="modal hide" id="previewAV">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3><?php echo trans('Preview'); ?></h3>
+            <h3><?php echo cbLang('filemanager.Preview'); ?></h3>
         </div>
         <div class="modal-body">
             <div class="row-fluid body-preview">
@@ -1538,13 +1538,13 @@ if (!empty($bc)) {
 
             //Replace Load button with exit button
             $('.tui-image-editor-header-buttons div').
-            replaceWith('<button class="tui-image-editor-exit-btn" ><?php echo trans('Image_Editor_Exit'); ?></button>');
+            replaceWith('<button class="tui-image-editor-exit-btn" ><?php echo cbLang('filemanager.Image_Editor_Exit'); ?></button>');
             $('.tui-image-editor-exit-btn').on('click', function() {
                 exitTUI();
             });
             //Replace download button with save
             $('.tui-image-editor-download-btn').
-            replaceWith('<button class="tui-image-editor-save-btn" ><?php echo trans('Image_Editor_Save'); ?></button>');
+            replaceWith('<button class="tui-image-editor-save-btn" ><?php echo cbLang('filemanager.Image_Editor_Save'); ?></button>');
             $('.tui-image-editor-save-btn').on('click', function() {
                 saveTUI();
             });
