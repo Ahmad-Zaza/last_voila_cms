@@ -9,7 +9,7 @@ use stdClass;
 use UploadHandler;
 use ZipArchive;
 
-class VoilaFileManagerController extends Controller
+class FileManagerController extends Controller
 {
     public function __construct()
     {
@@ -17,7 +17,7 @@ class VoilaFileManagerController extends Controller
 
     public function index()
     {
-        return view('crudbooster::voila-filamanager.filemanager');
+        return view('crudbooster::filamanager.filemanager');
     }
 
     public function execute()
@@ -843,6 +843,6 @@ class VoilaFileManagerController extends Controller
 
     public function ajaxCall()
     {
-        return view('crudbooster::voila-filamanager.ajax_calls');
+        return view('crudbooster::filamanager.ajax_calls');
     }
 }

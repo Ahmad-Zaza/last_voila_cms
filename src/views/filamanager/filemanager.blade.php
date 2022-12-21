@@ -644,9 +644,8 @@ $get_params = http_build_query($get_params);
                 die();
             }
         } else {
-            // $files = scandir('images/' . $rfm_subfolder . $subdir);
-            if (!File::isDirectory(public_path() . '/images/' . $rfm_subfolder . $subdir)) {
-                File::makeDirectory(public_path() . '/images/' . $rfm_subfolder . $subdir, 0777, true, true);
+            if (!File::isDirectory(public_path() . '/images')) {
+                File::makeDirectory(public_path() . '/images', 0777, true, true);
             }
             $files = scandir(public_path() . '/images/' . $rfm_subfolder . $subdir);
             // dd($config['current_path'] . $rfm_subfolder . $subdir);
