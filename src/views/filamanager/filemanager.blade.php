@@ -643,6 +643,7 @@ $get_params = http_build_query($get_params);
                 File::makeDirectory(public_path() . '/images', 0777, true, true);
             }
             $files = scandir(public_path() . '/images/' . $rfm_subfolder . $subdir);
+            // dd($files);
             // dd($config['current_path'] . $rfm_subfolder . $subdir);
         }
 
@@ -803,7 +804,8 @@ $get_params = http_build_query($get_params);
                             <div class="row-fluid">
                                 <div class="span4 half">
                                     <?php if ($config['upload_files']) {?>
-                                    <button class="tip btn upload-btn" title="{{ cbLang('filemanager.Upload_file') }}"><i
+                                    <button class="tip btn upload-btn"
+                                        title="{{ cbLang('filemanager.Upload_file') }}"><i
                                             class="rficon-upload"></i></button>
                                     <?php }?>
                                     <?php if ($config['create_text_files']) {?>
