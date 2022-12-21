@@ -1,7 +1,8 @@
 <?php
 $time = time();
 ini_set('display_errors', '0');
-$config = include 'vendor/crudbooster/assets/filemanager-files/includes/config/config.php';
+
+$config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/config/config.php';
 
 if (USE_ACCESS_KEYS == true) {
     if (!isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])) {
@@ -18,9 +19,9 @@ if (USE_ACCESS_KEYS == true) {
 $_SESSION['RF']['verify'] = 'RESPONSIVEfilemanager';
 
 if (isset($_POST['submit'])) {
-    // include 'vendor/crudbooster/assets/filemanager-files/includes/upload.php';
+    // include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/upload.php';
 } else {
-    $available_languages = include 'vendor/crudbooster/assets/filemanager-files/includes/lang/languages.php';
+    $available_languages = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/lang/languages.php';
 
     [$preferred_language] = array_values(array_filter([isset($_GET['lang']) ? $_GET['lang'] : null, isset($_SESSION['RF']['language']) ? $_SESSION['RF']['language'] : null, $config['default_language']]));
 
@@ -31,8 +32,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-include 'vendor/crudbooster/assets/filemanager-files/includes/include/utils.php';
-
+$utlis = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/utils.php';
 $subdir_path = '';
 
 if (isset($_GET['fldr']) && !empty($_GET['fldr'])) {
@@ -303,27 +303,32 @@ $get_params = http_build_query($get_params);
     <meta name="robots" content="noindex,nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Responsive FileManager</title>
-    <link rel="shortcut icon" href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/img/ico/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('vendor/crudbooster/filemanager-files/includes/img/ico/favicon.ico') }}">
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/css/jquery.fileupload.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/css/jquery.fileupload-ui.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('vendor/crudbooster/filemanager-files/includes/css/jquery.fileupload.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('vendor/crudbooster/filemanager-files/includes/css/jquery.fileupload-ui.css') }}">
     <!-- CSS adjustments for browsers with JavaScript disabled -->
     <noscript>
-        <link rel="stylesheet" href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/css/jquery.fileupload-noscript.css') }}">
+        <link rel="stylesheet"
+            href="{{ asset('vendor/crudbooster/filemanager-files/includes/css/jquery.fileupload-noscript.css') }}">
     </noscript>
     <noscript>
-        <link rel="stylesheet" href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/css/jquery.fileupload-ui-noscript.css') }}">
+        <link rel="stylesheet"
+            href="{{ asset('vendor/crudbooster/filemanager-files/includes/css/jquery.fileupload-ui-noscript.css') }}">
     </noscript>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.7.1/skin/blue.monday/jplayer.blue.monday.min.css" />
     <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
-    <link href="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('vendor/crudbooster/filemanager-files/includes/css/style.css') }}" rel="stylesheet"
+        type="text/css" />
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/plugins.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/plugins.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
     <link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js"></script>
@@ -332,7 +337,7 @@ $get_params = http_build_query($get_params);
     </script>
     <script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.0/tui-color-picker.js"></script>
     <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/modernizr.custom.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/modernizr.custom.js') }}"></script>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -343,7 +348,7 @@ $get_params = http_build_query($get_params);
         var ext_img = new Array('<?php echo implode("','", $config['ext_img']); ?>');
         var image_editor = <?php echo $config['tui_active'] ? 'true' : 'false'; ?>;
     </script>
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/include.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/include.js') }}"></script>
 </head>
 
 <body>
@@ -354,21 +359,21 @@ $get_params = http_build_query($get_params);
     <!-- The Canvas to Blob plugin is included for image resizing functionality -->
     <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
     <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.iframe-transport.js') }}"></script>
     <!-- The basic File Upload plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload.js') }}"></script>
     <!-- The File Upload processing plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-process.js') }}"></script>
     <!-- The File Upload image preview & resize plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-image.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-image.js') }}"></script>
     <!-- The File Upload audio preview plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-audio.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-audio.js') }}"></script>
     <!-- The File Upload video preview plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-video.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-video.js') }}"></script>
     <!-- The File Upload validation plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-validate.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-validate.js') }}"></script>
     <!-- The File Upload user interface plugin -->
-    <script src="{{ asset('vendor/crudbooster/assets/filemanager-files/includes/js/jquery.fileupload-ui.js') }}"></script>
+    <script src="{{ asset('vendor/crudbooster/filemanager-files/includes/js/jquery.fileupload-ui.js') }}"></script>
 
     <input type="hidden" id="ftp" value="<?php echo !!$ftp; ?>" />
     <input type="hidden" id="popup" value="<?php echo $popup; ?>" />
@@ -639,9 +644,12 @@ $get_params = http_build_query($get_params);
                 die();
             }
         } else {
+            // $files = scandir('images/' . $rfm_subfolder . $subdir);
+            if (!File::isDirectory(public_path() . '/images/' . $rfm_subfolder . $subdir)) {
+                File::makeDirectory(public_path() . '/images/' . $rfm_subfolder . $subdir, 0777, true, true);
+            }
+            $files = scandir(public_path() . '/images/' . $rfm_subfolder . $subdir);
             // dd($config['current_path'] . $rfm_subfolder . $subdir);
-            $files = scandir('images/' . $rfm_subfolder . $subdir);
-            // $files = scandir($config['current_path'] . $rfm_subfolder . $subdir);
         }
 
         $n_files = count($files);
@@ -801,7 +809,7 @@ $get_params = http_build_query($get_params);
                             <div class="row-fluid">
                                 <div class="span4 half">
                                     <?php if ($config['upload_files']) {?>
-                                    <button class="tip btn upload-btn" title="<?php echo trans('Upload_file'); ?>"><i
+                                    <button class="tip btn upload-btn" title="{{ trans('Upload_file') }}"><i
                                             class="rficon-upload"></i></button>
                                     <?php }?>
                                     <?php if ($config['create_text_files']) {?>
@@ -925,7 +933,7 @@ $get_params = http_build_query($get_params);
         <div class="row-fluid">
             <?php
             // $link = 'dialog.php?' . $get_params;
-            $link = route('dialog') . $get_params;
+            $link = route('dialog') . '?' . $get_params;
             ?>
             <ul class="breadcrumb">
                 <li class="pull-left"><a href="<?php echo $link; ?>/"><i class="icon-home"></i></a></li>
@@ -1100,18 +1108,17 @@ if (!empty($bc)) {
                                 <div class="img-precontainer">
                                     <div class="img-container directory"><span></span>
                                         <?php
-                                            $back = $file == '..' ? "_back" : "";
-                                            $vpath = "vendor/crudbooster/assets/filemanager-files/includes/img/" . $config['icon_theme'] . "/folder" . $back . ".png";
+                                        $back = $file == '..' ? '_back' : '';
+                                        $vpath = 'vendor/crudbooster/filemanager-files/includes/img/' . $config['icon_theme'] . '/folder' . $back . '.png';
                                         ?>
-                                        <img class="directory-img"
-                                            data-src="<?php echo asset($vpath); ?>" />
+                                        <img class="directory-img" data-src="<?php echo asset($vpath); ?>" />
                                     </div>
                                 </div>
                                 <div class="img-precontainer-mini directory">
                                     <div class="img-container-mini">
                                         <span></span>
                                         <img class="directory-img"
-                                            data-src="img/<?php echo $config['icon_theme']; ?>/folder<?php if ($file == '..') {
+                                            data-src="vendor/crudbooster/filemanager-files/includes/img/<?php echo $config['icon_theme']; ?>/folder<?php if ($file == '..') {
                                                 echo '_back';
                                             } ?>.png" />
                                     </div>
@@ -1264,11 +1271,12 @@ if (!empty($bc)) {
         $no_thumb           = false;
         if ($src_thumb == "") {
             $no_thumb = true;
-            if (file_exists('vendor/crudbooster/assets/filemanager-files/includes/img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
-                $src_thumb = 'vendor/crudbooster/assets/filemanager-files/includes/img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg";
-                // dd("exist ", $src_thumb);
+            // if (file_exists(base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
+                if (file_exists('vendor/crudbooster/filemanager-files/includes/img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg")) {
+                $src_thumb = 'vendor/crudbooster/filemanager-files/includes/img/' . $config['icon_theme'] . '/' . $file_array['extension'] . ".jpg";
             } else {
-                $src_thumb = "vendor/crudbooster/assets/filemanager-files/includes/img/" . $config['icon_theme'] . "/default.jpg";
+                $src_thumb = "vendor/crudbooster/filemanager-files/includes/img/" . $config['icon_theme'] . "/default.jpg";
+
             }
             $is_icon_thumb = true;
         }
@@ -1467,7 +1475,9 @@ if (!empty($bc)) {
         <div id="loading"
             style="background-color:#000; position:fixed; width:100%; height:100%; top:0px; left:0px;z-index:100000">
         </div>
-        <img id="loading_animation" src="vendor/crudbooster/assets/filemanager-files/includes/img/storing_animation.gif" alt="loading"
+        <img id="loading_animation"
+            src="<?php echo base_path(); ?>/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/img/storing_animation.gif"
+            alt="loading"
             style="z-index:10001; margin-left:-32px; margin-top:-32px; position:fixed; left:50%; top:50%">
     </div>
     <!-- loading div end -->
