@@ -423,13 +423,13 @@ $config = array(
     'header.border'                        => '0px',
 
     // main icons
-    'menu.normalIcon.path'                 => 'svg/icon-d.svg',
+    'menu.normalIcon.path'                 => 'vendor/filemanager/svg/icon-d.svg',
     'menu.normalIcon.name'                 => 'icon-d',
-    'menu.activeIcon.path'                 => 'svg/icon-b.svg',
+    'menu.activeIcon.path'                 => 'vendor/filemanager/svg/icon-b.svg',
     'menu.activeIcon.name'                 => 'icon-b',
-    'menu.disabledIcon.path'               => 'svg/icon-a.svg',
+    'menu.disabledIcon.path'               => 'vendor/filemanager/svg/icon-a.svg',
     'menu.disabledIcon.name'               => 'icon-a',
-    'menu.hoverIcon.path'                  => 'svg/icon-c.svg',
+    'menu.hoverIcon.path'                  => 'vendor/filemanager/svg/icon-c.svg',
     'menu.hoverIcon.name'                  => 'icon-c',
     'menu.iconSize.width'                  => '24px',
     'menu.iconSize.height'                 => '24px',
@@ -439,9 +439,9 @@ $config = array(
     'submenu.partition.color'              => '#000000',
 
     // submenu icons
-    'submenu.normalIcon.path'              => 'svg/icon-d.svg',
+    'submenu.normalIcon.path'              => 'vendor/filemanager/svg/icon-d.svg',
     'submenu.normalIcon.name'              => 'icon-d',
-    'submenu.activeIcon.path'              => 'svg/icon-b.svg',
+    'submenu.activeIcon.path'              => 'vendor/filemanager/svg/icon-b.svg',
     'submenu.activeIcon.name'              => 'icon-b',
     'submenu.iconSize.width'               => '32px',
     'submenu.iconSize.height'              => '32px',

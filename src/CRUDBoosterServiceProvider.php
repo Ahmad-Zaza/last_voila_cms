@@ -38,6 +38,8 @@ class CRUDBoosterServiceProvider extends ServiceProvider
             $this->publishes([__DIR__ . '/filemanager/includes/css' => public_path('vendor/filemanager/css')], 'filemanager_css');
             $this->publishes([__DIR__ . '/filemanager/includes/js' => public_path('vendor/filemanager/js')], 'filemanager_js');
             $this->publishes([__DIR__ . '/filemanager/includes/lang' => public_path('vendor/filemanager/lang')], 'filemanager_lang');
+            $this->publishes([__DIR__ . '/filemanager/includes/svg' => public_path('vendor/filemanager/svg')], 'filemanager_svg');
+
         }
 
         $this->customValidation();

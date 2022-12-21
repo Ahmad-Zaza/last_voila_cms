@@ -50,6 +50,7 @@ class CrudboosterInstallationCommand extends Command
                 mkdir(public_path('vendor/filemanager/css'), 0777);
                 mkdir(public_path('vendor/filemanager/js'), 0777);
                 mkdir(public_path('vendor/filemanager/lang'), 0777);
+                mkdir(public_path('vendor/filemanager/svg'), 0777);
             }
 
 
