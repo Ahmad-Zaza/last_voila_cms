@@ -1,4 +1,6 @@
-<?php namespace crocodicstudio\crudbooster\commands;
+<?php
+
+namespace crocodicstudio\crudbooster\commands;
 
 use App;
 use Cache;
@@ -40,9 +42,16 @@ class CrudboosterInstallationCommand extends Command
 
         if ($this->confirm('Do you have setting the database configuration at .env ?')) {
 
-            if (! file_exists(public_path('vendor'))) {
+            if (!file_exists(public_path('vendor'))) {
                 mkdir(public_path('vendor'), 0777);
+                mkdir(public_path('vendor/filemanager'), 0777);
+                mkdir(public_path('vendor/filemanager/img'), 0777);
+                mkdir(public_path('vendor/filemanager/images'), 0777);
+                mkdir(public_path('vendor/filemanager/css'), 0777);
+                mkdir(public_path('vendor/filemanager/js'), 0777);
+                mkdir(public_path('vendor/filemanager/lang'), 0777);
             }
+
 
             $this->info('Publishing crudbooster assets...');
             $this->call('vendor:publish', ['--provider' => 'crocodicstudio\crudbooster\CRUDBoosterServiceProvider']);
@@ -51,15 +60,15 @@ class CrudboosterInstallationCommand extends Command
             $composer = $this->findComposer();
 
             $process = (app()->version() >= 7.0)
-                ? new Process([$composer.' dumpautoload'])
-                : new Process($composer.' dumpautoload');
+                ? new Process([$composer . ' dumpautoload'])
+                : new Process($composer . ' dumpautoload');
 
             $process->setWorkingDirectory(base_path())->run();
 
             $this->info('Migrating database...');
 
-            if (! class_exists('CBSeeder')) {
-                require_once __DIR__.'/../database/seeds/CBSeeder.php';
+            if (!class_exists('CBSeeder')) {
+                require_once __DIR__ . '/../database/seeds/CBSeeder.php';
             }
 
             $this->call('migrate');
@@ -81,12 +90,12 @@ class CrudboosterInstallationCommand extends Command
     private function header()
     {
         $this->info("
-#     __________  __  ______  ____                   __           
+#     __________  __  ______  ____                   __
 #    / ____/ __ \/ / / / __ \/ __ )____  ____  _____/ /____  _____
 #   / /   / /_/ / / / / / / / __  / __ \/ __ \/ ___/ __/ _ \/ ___/
-#  / /___/ _, _/ /_/ / /_/ / /_/ / /_/ / /_/ (__  ) /_/  __/ /    
-#  \____/_/ |_|\____/_____/_____/\____/\____/____/\__/\___/_/     
-#                                                                                                                       
+#  / /___/ _, _/ /_/ / /_/ / /_/ / /_/ / /_/ (__  ) /_/  __/ /
+#  \____/_/ |_|\____/_____/_____/\____/\____/____/\__/\___/_/
+#
 			");
         $this->info('--------- :===: Thanks for choosing CRUDBooster :==: ---------------');
         $this->info('====================================================================');
@@ -98,7 +107,7 @@ class CrudboosterInstallationCommand extends Command
         $system_failed = 0;
         $laravel = app();
 
-        $this->info("Your laravel version: ".$laravel::VERSION);
+        $this->info("Your laravel version: " . $laravel::VERSION);
         $this->info("---");
 
         if (version_compare($laravel::VERSION, "6.0", ">=")) {
@@ -111,7 +120,7 @@ class CrudboosterInstallationCommand extends Command
         if (version_compare(phpversion(), '7.2.0', '>=')) {
             $this->info('PHP Version (>= 7.2.*): [Good]');
         } else {
-            $this->info('PHP Version (>= 7.2.*): [Bad] Yours: '.phpversion());
+            $this->info('PHP Version (>= 7.2.*): [Bad] Yours: ' . phpversion());
             $system_failed++;
         }
 
@@ -200,8 +209,8 @@ class CrudboosterInstallationCommand extends Command
      */
     protected function findComposer()
     {
-        if (file_exists(getcwd().'/composer.phar')) {
-            return '"'.PHP_BINARY.'" '.getcwd().'/composer.phar';
+        if (file_exists(getcwd() . '/composer.phar')) {
+            return '"' . PHP_BINARY . '" ' . getcwd() . '/composer.phar';
         }
 
         return 'composer';

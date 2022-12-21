@@ -1,4 +1,6 @@
-<?php namespace crocodicstudio\crudbooster;
+<?php
+
+namespace crocodicstudio\crudbooster;
 
 use crocodicstudio\crudbooster\commands\CrudboosterVersionCommand;
 use crocodicstudio\crudbooster\commands\Mailqueues;
@@ -21,18 +23,22 @@ class CRUDBoosterServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->loadViewsFrom(__DIR__.'/views', 'crudbooster');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadTranslationsFrom(__DIR__.'/localization','crudbooster');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewsFrom(__DIR__ . '/views', 'crudbooster');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/localization', 'crudbooster');
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
-        if($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/configs/crudbooster.php' => config_path('crudbooster.php')],'cb_config');
-            $this->publishes([__DIR__.'/userfiles/controllers/CBHook.php' => app_path('Http/Controllers/CBHook.php')],'CBHook');
-            $this->publishes([__DIR__.'/userfiles/controllers/AdminCmsUsersController.php' => app_path('Http/Controllers/AdminCmsUsersController.php')],'cb_user_controller');
-            $this->publishes([__DIR__.'/assets'=>public_path('vendor/crudbooster')],'cb_asset');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([__DIR__ . '/configs/crudbooster.php' => config_path('crudbooster.php')], 'cb_config');
+            $this->publishes([__DIR__ . '/userfiles/controllers/CBHook.php' => app_path('Http/Controllers/CBHook.php')], 'CBHook');
+            $this->publishes([__DIR__ . '/userfiles/controllers/AdminCmsUsersController.php' => app_path('Http/Controllers/AdminCmsUsersController.php')], 'cb_user_controller');
+            $this->publishes([__DIR__ . '/assets' => public_path('vendor/crudbooster')], 'cb_asset');
             $this->publishes([__DIR__ . '/assets/assets/js/voila_filemanager.js' => public_path('js/voila_filemanager.js')], 'voila_filemanager');
-
+            $this->publishes([__DIR__ . '/filemanager/includes/img' => public_path('vendor/filemanager/img')], 'filemanager_img');
+            $this->publishes([__DIR__ . '/filemanager/includes/images' => public_path('vendor/filemanager/images')], 'filemanager_images');
+            $this->publishes([__DIR__ . '/filemanager/includes/css' => public_path('vendor/filemanager/css')], 'filemanager_css');
+            $this->publishes([__DIR__ . '/filemanager/includes/js' => public_path('vendor/filemanager/js')], 'filemanager_js');
+            $this->publishes([__DIR__ . '/filemanager/includes/lang' => public_path('vendor/filemanager/lang')], 'filemanager_lang');
         }
 
         $this->customValidation();
@@ -46,13 +52,13 @@ class CRUDBoosterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require __DIR__.'/helpers/Helper.php';
+        require __DIR__ . '/helpers/Helper.php';
 
-        $this->mergeConfigFrom(__DIR__.'/configs/crudbooster.php','crudbooster');
+        $this->mergeConfigFrom(__DIR__ . '/configs/crudbooster.php', 'crudbooster');
 
         $this->registerSingleton();
 
-        if($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->commands('crudboosterinstall');
             $this->commands('crudboosterupdate');
             $this->commands('crudboosterVersionCommand');
@@ -69,38 +75,38 @@ class CRUDBoosterServiceProvider extends ServiceProvider
 
     private function registerSingleton()
     {
-        $this->app->singleton('crudbooster', function ()
-        {
+        $this->app->singleton('crudbooster', function () {
             return true;
         });
 
-        $this->app->singleton('crudboosterinstall',function() {
+        $this->app->singleton('crudboosterinstall', function () {
             return new CrudboosterInstallationCommand;
         });
 
-        $this->app->singleton('crudboosterupdate',function() {
+        $this->app->singleton('crudboosterupdate', function () {
             return new CrudboosterUpdateCommand;
         });
 
-        $this->app->singleton("crudboosterVersionCommand", function() {
+        $this->app->singleton("crudboosterVersionCommand", function () {
             return new CrudboosterVersionCommand;
         });
 
-        $this->app->singleton("crudboosterMailQueue", function() {
+        $this->app->singleton("crudboosterMailQueue", function () {
             return new Mailqueues;
         });
     }
 
-    private function customValidation() {
+    private function customValidation()
+    {
         Validator::extend('alpha_spaces', function ($attribute, $value) {
             // This will only accept alpha and spaces.
             // If you want to accept hyphens use: /^[\pL\s-]+$/u.
             return preg_match('/^[\pL\s]+$/u', $value);
-        },'The :attribute should be letters and spaces only');
+        }, 'The :attribute should be letters and spaces only');
 
         Validator::extend('alpha_num_spaces', function ($attribute, $value) {
             // This will only accept alphanumeric and spaces.
             return preg_match('/^[a-zA-Z0-9\s]+$/', $value);
-        },'The :attribute should be alphanumeric characters and spaces only');
+        }, 'The :attribute should be alphanumeric characters and spaces only');
     }
 }

@@ -22,9 +22,9 @@ class FileManagerController extends Controller
 
     public function execute()
     {
-        $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/config/config.php';
+        $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/config/config.php';
 
-        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/include/utils.php';
+        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/utils.php';
 
         if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
             response(trans('forbidden') . AddErrorLocation())->send();
@@ -36,10 +36,10 @@ class FileManagerController extends Controller
             exit;
         }
 
-        if (isset($_SESSION['RF']['language']) && file_exists(base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/lang/' . basename($_SESSION['RF']['language']) . '.php')) {
-            $languages = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/lang/languages.php';
+        if (isset($_SESSION['RF']['language']) && file_exists(base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/lang/' . basename($_SESSION['RF']['language']) . '.php')) {
+            $languages = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/lang/languages.php';
             if (array_key_exists($_SESSION['RF']['language'], $languages)) {
-                include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/lang/' . basename($_SESSION['RF']['language']) . '.php';
+                include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/lang/' . basename($_SESSION['RF']['language']) . '.php';
             } else {
                 response(trans('Lang_Not_Found') . AddErrorLocation())->send();
                 exit;
@@ -532,7 +532,7 @@ class FileManagerController extends Controller
         ini_set('display_errors', '0');
         try {
             if (!isset($config)) {
-                $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/config/config.php';
+                $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/config/config.php';
             }
 
 
@@ -540,9 +540,9 @@ class FileManagerController extends Controller
                 response(trans('forbidden') . AddErrorLocation(), 403)->send();
                 exit;
             }
-            include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/include/utils.php';
+            include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/utils.php';
 
-            include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/include/mime_type_lib.php';
+            include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/mime_type_lib.php';
 
             $ftp = ftp_con($config);
 
@@ -588,7 +588,7 @@ class FileManagerController extends Controller
                 $path = fix_dirname($path) . '/';
             }
 
-            require(base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/UploadHandler.php');
+            require(base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/UploadHandler.php');
             $messages = null;
             if (trans("Upload_error_messages") !== "Upload_error_messages") {
                 $messages = trans("Upload_error_messages");
@@ -726,10 +726,10 @@ class FileManagerController extends Controller
     }
     public function forceDownload()
     {
-        $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/config/config.php';
+        $config = include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/config/config.php';
 
-        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/include/utils.php';
-        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/assets/filemanager-files/includes/include/mime_type_lib.php';
+        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/utils.php';
+        include base_path() . '/vendor/voila_crocodicstudio/crudbooster/src/filemanager/includes/include/mime_type_lib.php';
 
         if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
             response(trans('forbidden') . AddErrorLocation(), 403)->send();
