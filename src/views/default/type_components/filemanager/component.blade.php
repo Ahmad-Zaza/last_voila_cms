@@ -1,7 +1,7 @@
 <script src="{{ asset('vendor/crudbooster/assets/adminlte/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 <script src="{{ asset('vendor/crudbooster/assets/adminlte/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
-<div class='form-group {{ $header_group_class }} {{ $errors->first($name) ? 'has-error' : '' }}'
+<div class='form-group filemanager-form-group {{ $header_group_class }} {{ $errors->first($name) ? 'has-error' : '' }}'
     id='form-group-{{ $name }}' style='{{ @$form['style'] }}'>
     <label class='control-label col-sm-2'>{{ $form['label'] }}
         @if ($required)
@@ -9,9 +9,9 @@
         @endif
     </label>
 
-    <div class="{{ $col_width ?: 'col-sm-10' }}">
 
-        @if ($value == '')
+    @if ($value == '')
+        <div class="{{ $col_width ? $col_width . ' empty-filemanager-col' : 'col-sm-10 filemanager-col' }}">
             <div class="input-group">
                 <input id="{{ $name }}" class="form-control hide" type="text" value='{{ $value }}'
                     name="{{ $name }}">
@@ -32,9 +32,10 @@
                 </span>
 
             </div>
-        @endif
+    @endif
 
-        @if ($value)
+    @if ($value)
+        <div class="{{ $col_width ? $col_width . ' filemanager-col' : 'col-sm-10 filemanager-col' }}">
             <input id="thumbnail-{{ $name }}" class="form-control" type="hidden" value='{{ $value }}'
                 name="{{ $name }}">
             @if (@$form['filemanager_type'] == 'file')
@@ -56,16 +57,15 @@
             @endif
 
             @if (!$readonly || !$disabled)
-                <p><a class='btn btn-danger btn-delete btn-sm'
-                        onclick='swal({   title: "{{ cbLang('delete_title_confirm') }}",   text: "{{ cbLang('delete_description_confirm') }}",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "{{ cbLang('confirmation_yes') }}", cancelButtonText: "{{ cbLang('button_cancel') }}",   closeOnConfirm: false }, function(){  location.href="{{ url(CRUDBooster::mainpath("update-single?table=$table&column=$name&value=&id=$id")) }}" });'><i
+                <p><a class='btn btn-danger btn-delete btn-sm btn-del-filemanager'
+                        onclick='swal({   title: "{{ cbLang('delete_title_confirm') }}",   text: "{{ cbLang('delete_description_confirm') }}",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "{{ cbLang('confirmation_yes') }}", cancelButtonText: "{{ cbLang('button_cancel') }}",   closeOnConfirm: false}, function(){ deleteImage();});'><i
                             class='fa fa-ban'></i> {{ cbLang('text_delete') }} </a></p>
             @endif
-        @endif
+    @endif
 
-
-        <div class='help-block'>{{ @$form['help'] }}</div>
-        <div class="text-danger">{!! $errors->first($name) ? "<i class='fa fa-info-circle'></i> " . $errors->first($name) : '' !!}</div>
-    </div>
+    <div class='help-block'>{{ @$form['help'] }}</div>
+    <div class="text-danger">{!! $errors->first($name) ? "<i class='fa fa-info-circle'></i> " . $errors->first($name) : '' !!}</div>
+</div>
 </div>
 @if (@$form['filemanager_type'])
     @push('bottom')
@@ -92,31 +92,69 @@
 
 <script>
     function OpenInsertImagesingle(name) {
-
-        // var link=`<iframe width="100%" height="400" src="/js/includes/filemanager/dialog.php?type=2&multiple=0&field_id=`+name+`" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>`;
         var link = `<iframe width="100%" height="400" src="{{ Route('dialog') }}?type=2&multiple=0&field_id=` + name +
             `" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll;"></iframe>`;
-        console.log(link);
 
         $("#modalInsertPhotosingle{{ $name }} .modal-body").html(link);
         $("#modalInsertPhotosingle{{ $name }}").modal();
     }
 
+    function deleteImage() {
+        let currUrl = @json(CRUDBooster::mainpath()) + '/update-single';
+        let table = @json($table);
+        let name = @json($name);
+        let id = @json($id);
+        let ajaxUrl = currUrl + '?table=' + table + '&column=' + name + '&value=&id=' + id;
+
+        $.ajax({
+            type: 'GET',
+            url: ajaxUrl,
+            success: function(data) {
+                $('.filemanager-col').remove();
+                $('.filemanager-form-group').append(`
+                    <div class="{{ $col_width ? $col_width . ' empty-filemanager-col' : 'col-sm-10 filemanager-col' }}">
+                        <div class="input-group">
+                            <input id="{{ $name }}" class="form-control hide" type="text" value='{{ $value }}'
+                                name="{{ $name }}">
+
+                            <a data-lightbox="roadtrip" class="hide" id="link-{{ $name }}" href="">
+                                <img style="width:150px;height:150px;" id="img-{{ $name }}"
+                                    title="Add image for {{ $name }}" src="">
+                            </a>
+
+                            <span class="input-group-btn">
+                                <a id="" onclick="OpenInsertImagesingle('{{ $name }}')" class="btn btn-primary">
+                                    @if (@$form['filemanager_type'] == 'file')
+                                        <i class="fa fa-file-o"></i> {{ cbLang('chose_an_file') }}
+                                    @else
+                                        <i class='fa fa-picture-o'></i> {{ cbLang('chose_an_image') }}
+                                    @endif
+                                </a>
+                            </span>
+
+                        </div>
+                        <div class='help-block'>{{ @$form['help'] }}</div>
+                        <div class="text-danger">{!! $errors->first($name) ? "<i class='fa fa-info-circle'></i> " . $errors->first($name) : '' !!}</div>
+                    </div>
+                `);
+            $('.showSweetAlert ').removeClass('visible').addClass('hide');
+            $('.sweet-overlay').addClass('hide');
+            },
+            error: function(data) {
+                console.log("and error while delete image", data);
+            }
+        });
+    }
+
     var id = '#modalInsertPhotosingle{{ $name }}';
-
     $(function() {
-
         $(id).on('hidden.bs.modal', function() {
-
             var check = $('#{{ $name }}').val();
             if (check != "") {
                 $("#img-{{ $name }}").attr("src", check);
                 $("#link-{{ $name }}").attr("href", check);
                 $("#link-{{ $name }}").removeClass("hide");
             }
-
-
-
         });
     });
 </script>
