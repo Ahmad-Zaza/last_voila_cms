@@ -9,10 +9,11 @@ use stdClass;
 use UploadHandler;
 use ZipArchive;
 
-class FileManagerController extends Controller
+class FileManagerController extends \crocodicstudio\crudbooster\controllers\CBController
 {
     public function __construct()
     {
+        $this->middleware('\crocodicstudio\crudbooster\middlewares\CBBackend');
     }
 
     public function index()
